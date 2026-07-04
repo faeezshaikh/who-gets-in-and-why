@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Gets In and Why — Family Playbook</title>
+<meta name="description" content="An interactive summary of Jeffrey Selingo's 'Who Gets In and Why' plus grade-by-grade action plans for two kids.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#21304A;        /* committee-room navy */
+  --paper:#F5EDDC;      /* manila */
+  --folder:#EADFC2;     /* folder tan */
+  --folder-deep:#DCCB9F;
+  --stamp:#B3402E;      /* deny/waitlist red */
+  --admit:#2F6B4F;      /* admit green */
+  --graphite:#33302B;
+  --line:#C9B98F;
+  --card:#FBF6E9;
+  --display:'Fraunces',Georgia,serif;
+  --body:'Public Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--graphite);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,var(--ink) 27px,var(--ink) 28px)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+
+/* ---------- header / hero ---------- */
+header{background:var(--ink);color:var(--paper);padding:42px 0 0;position:relative;overflow:hidden}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#C8B98A;margin-bottom:14px}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(34px,6vw,64px);line-height:1.03;letter-spacing:-.01em}
+h1 em{font-style:italic;color:#E4C879}
+.hero-sub{max-width:640px;margin:18px 0 8px;font-size:17px;color:#DDD3B8}
+.hero-meta{display:flex;gap:22px;flex-wrap:wrap;margin:22px 0 34px;font-family:var(--mono);font-size:12.5px;color:#A9B4C8}
+.hero-meta b{color:#F5EDDC;font-weight:600}
+.stampbox{position:absolute;right:24px;top:34px;transform:rotate(7deg);border:3px solid #E4C879;color:#E4C879;
+  font-family:var(--mono);font-weight:600;letter-spacing:.14em;padding:8px 14px;font-size:13px;border-radius:4px;opacity:.9}
+@media(max-width:760px){.stampbox{display:none}}
+
+/* ---------- folder-tab nav (signature) ---------- */
+nav{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end;transform:translateY(1px)}
+nav button{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;font-weight:500;
+  background:var(--folder-deep);color:var(--ink);border:1px solid #B9A470;border-bottom:none;
+  border-radius:10px 10px 0 0;padding:10px 15px 8px;cursor:pointer;opacity:.82;transition:.15s;
+  position:relative;top:4px}
+nav button:hover{opacity:1;top:2px}
+nav button.active{background:var(--paper);opacity:1;top:0;padding-top:13px;font-weight:600;
+  box-shadow:0 -3px 8px rgba(0,0,0,.18)}
+nav button:focus-visible{outline:3px solid #E4C879;outline-offset:-3px}
+
+/* ---------- sections ---------- */
+main{padding:40px 0 30px}
+section{display:none;animation:fade .35s ease}
+section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){section.active{animation:none}}
+
+h2{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.6vw,38px);color:var(--ink);margin:6px 0 6px}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--stamp)}
+.lede{max-width:720px;font-size:17px;margin:10px 0 26px}
+h3{font-family:var(--display);font-weight:600;font-size:21px;color:var(--ink);margin:34px 0 10px}
+p+p{margin-top:10px}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--card);margin:14px 0 8px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;text-align:left;
+  background:var(--ink);color:var(--paper);padding:10px 14px}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even){background:#F4ECD8}
+td b{color:var(--ink)}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;padding:2px 8px;border-radius:20px;
+  border:1.5px solid currentColor;font-weight:600}
+.tag.hi{color:var(--admit)} .tag.med{color:#8A6D1D} .tag.lo{color:var(--stamp)}
+
+/* ---------- myth cards ---------- */
+.grid{display:grid;gap:16px;margin-top:16px}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.myth{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 18px 16px;position:relative;overflow:hidden}
+.myth .m{font-family:var(--display);font-weight:600;font-size:17px;color:var(--ink);padding-right:86px}
+.myth .r{margin-top:8px;font-size:14.5px}
+.myth .stamp{position:absolute;top:14px;right:-8px;transform:rotate(10deg);font-family:var(--mono);font-weight:600;
+  font-size:11px;letter-spacing:.12em;border:2.5px solid var(--stamp);color:var(--stamp);padding:4px 10px;border-radius:3px;opacity:.85}
+
+/* ---------- callout ---------- */
+.callout{border:2px solid var(--stamp);background:#FBEFE9;border-radius:8px;padding:18px 20px;margin:22px 0}
+.callout.green{border-color:var(--admit);background:#EAF2ED}
+.callout h4{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.callout.green h4{color:var(--admit)} .callout:not(.green) h4{color:var(--stamp)}
+
+/* ---------- dossier / checklist ---------- */
+.dossier{background:var(--folder);border:1px solid #B9A470;border-radius:10px;padding:22px;margin-top:18px;
+  box-shadow:0 2px 0 #B9A470}
+.dossier-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline;
+  border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:6px}
+.dossier-head .name{font-family:var(--display);font-weight:900;font-size:24px;color:var(--ink)}
+.dossier-head .case{font-family:var(--mono);font-size:12px;color:#6B5D3B}
+.progress{height:12px;background:#D6C596;border-radius:20px;overflow:hidden;margin:12px 0 4px;border:1px solid #B9A470}
+.progress>div{height:100%;width:0%;background:var(--admit);transition:width .3s}
+.progress-label{font-family:var(--mono);font-size:12px;color:#5B4F30}
+
+details{border-bottom:1px dashed #B9A470}
+details:last-of-type{border-bottom:none}
+summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:12px;padding:15px 4px;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary .yr{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;background:var(--ink);
+  color:var(--paper);padding:4px 9px;border-radius:4px;white-space:nowrap}
+summary .t{font-family:var(--display);font-weight:600;font-size:17.5px;color:var(--ink);flex:1}
+summary .chev{font-family:var(--mono);color:#6B5D3B;transition:transform .2s}
+details[open] .chev{transform:rotate(90deg)}
+.theme{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--stamp);margin:2px 0 10px}
+.items{padding:2px 4px 18px}
+.item{display:flex;gap:11px;align-items:flex-start;padding:7px 8px;border-radius:6px}
+.item:hover{background:#F1E6C8}
+.item input{margin-top:4px;width:17px;height:17px;accent-color:var(--admit);cursor:pointer;flex-shrink:0}
+.item label{cursor:pointer;font-size:14.8px}
+.item input:checked+label{color:#6B5D3B;text-decoration:line-through;text-decoration-color:#9c8a5c}
+.item label b{color:var(--ink)}
+
+/* ---------- do / don't ---------- */
+.dd{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin-top:16px}
+.dd .col{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.dd h4{font-family:var(--mono);letter-spacing:.15em;font-size:12px;text-transform:uppercase;margin-bottom:10px}
+.dd .do h4{color:var(--admit)} .dd .dont h4{color:var(--stamp)}
+.dd ul{list-style:none}
+.dd li{padding:6px 0 6px 24px;position:relative;font-size:14.5px;border-top:1px dashed var(--line)}
+.dd li:first-of-type{border-top:none}
+.dd .do li::before{content:"✓";position:absolute;left:2px;color:var(--admit);font-weight:700}
+.dd .dont li::before{content:"✕";position:absolute;left:2px;color:var(--stamp);font-weight:700}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#A9B4C8;margin-top:40px;padding:26px 0;font-size:13.5px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.views{font-family:var(--mono);font-size:12.5px;border:1px solid #3D5074;border-radius:20px;padding:6px 14px;color:#DDD3B8}
+.views b{color:#E4C879}
+button.reset{font-family:var(--mono);font-size:11.5px;background:none;border:1px solid #3D5074;color:#A9B4C8;
+  border-radius:20px;padding:6px 12px;cursor:pointer}
+button.reset:hover{color:#F5EDDC;border-color:#F5EDDC}
+.smallnote{font-size:13px;color:#7a6c45;margin-top:6px;font-family:var(--mono)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="stampbox">FAMILY&nbsp;COPY</div>
+    <div class="eyebrow">Book playbook · Jeffrey Selingo · 2020</div>
+    <h1>Who Gets In <em>and Why</em></h1>
+    <p class="hero-sub">A one-page decoder of how selective college admissions actually works — plus grade-by-grade action plans for a rising 9th grader (medicine) and a rising 7th grader (engineering / CS / AI).</p>
+    <div class="hero-meta">
+      <span>CASE FILE: <b>2 APPLICANTS</b></span>
+      <span>HORIZON: <b>CLASSES OF 2030 &amp; 2032</b></span>
+      <span>STATUS: <b>IN PROGRESS</b></span>
+    </div>
+    <nav id="nav" role="tablist" aria-label="Sections">
+      <button data-tab="big" class="active">01 · The Big Picture</button>
+      <button data-tab="takeaways">02 · Key Takeaways</button>
+      <button data-tab="money">03 · Money &amp; Scholarships</button>
+      <button data-tab="kid1">04 · 9th Grader · Pre-Med</button>
+      <button data-tab="kid2">05 · 7th Grader · Engineering</button>
+      <button data-tab="family">06 · Family Playbook</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= TAB 1 : BIG PICTURE ================= -->
+<section id="big" class="active">
+  <div class="kicker">The book in one line</div>
+  <h2>Admissions serves the college's agenda — not yours.</h2>
+  <p class="lede">Selingo spent a year embedded inside admissions offices (Emory, Davidson, University of Washington) while following three high-school seniors. His central finding: selective colleges aren't ranking teenagers by pure merit. They're <b>assembling a class</b> that meets the institution's needs — revenue, rankings, athletic rosters, geographic and demographic mix, and enrollment targets by major. Two equally strong applicants routinely get opposite decisions because of what the <em>college</em> needs that year.</p>
+
+  <h3>The single most useful framework: Buyers vs. Sellers</h3>
+  <p>Every college sits in one of two camps, and everything about how it recruits, admits, and prices itself follows from that position.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th></th><th>Sellers (the "haves")</th><th>Buyers (the "have-nots")</th></tr></thead>
+    <tbody>
+      <tr><td><b>Who they are</b></td><td>Elite brands drowning in applications (Ivies, Stanford, MIT, Duke, top publics)</td><td>The vast majority of colleges — many excellent — that must actively recruit to fill seats</td></tr>
+      <tr><td><b>Admissions mindset</b></td><td>Gatekeepers selecting and shaping a class</td><td>Marketers persuading students to enroll</td></tr>
+      <tr><td><b>Financial aid</b></td><td>Mostly (Ivies: entirely) <b>need-based</b>; little or no merit aid</td><td>Heavy <b>merit "scholarships"</b> — really tuition discounts used as coupons</td></tr>
+      <tr><td><b>Who holds leverage</b></td><td>The college</td><td>The student</td></tr>
+      <tr><td><b>Strategy implication</b></td><td>You conform to their institutional needs</td><td>Strong students can negotiate price and perks</td></tr>
+    </tbody>
+  </table></div>
+  <p class="smallnote">Rough test: if a school admits well under ~20% and rarely advertises merit aid, it's a seller.</p>
+
+  <h3>How a file is actually read</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Stage</th><th>What happens</th><th>What it means for applicants</th></tr></thead>
+    <tbody>
+      <tr><td><b>1 · Recruitment funnel</b></td><td>Colleges buy names from the College Board/ACT and market years in advance; "demonstrated interest" is tracked at many schools</td><td>Mail ≠ interest in admitting you. But opening emails, visiting, and interviewing can matter at interest-tracking schools</td></tr>
+      <tr><td><b>2 · Fast holistic reads</b></td><td>Readers spend only minutes per file, often two readers at once, assigning numeric ratings (typically academics + extracurricular/personal)</td><td>Clarity beats volume. The transcript is read first and matters most; the rest breaks ties</td></tr>
+      <tr><td><b>3 · Context</b></td><td>You're judged against your own high school — its course offerings and past applicants — not against the nation</td><td>Take the hardest schedule <em>your school offers</em>; you're not penalized for courses that don't exist there</td></tr>
+      <tr><td><b>4 · Institutional priorities</b></td><td>Athletes, legacies, full-payers, first-gen students, target majors, gender balance and geography get thumbs on the scale</td><td>Hooks you can't control exist. Focus energy on the levers you do control</td></tr>
+      <tr><td><b>5 · "Shaping" the class</b></td><td>After reading season, deans re-cut the admitted pool to hit revenue, diversity, and enrollment targets — some "admits" are pulled back, some denials revived</td><td>Rejection is often about class math, not your worth. Build a balanced list so no single verdict decides your future</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout green">
+    <h4>The reframe that lowers the family's blood pressure</h4>
+    <p>Treat the search like a <b>job hunt, not a lottery ticket</b>: research widely, apply to a balanced slate, expect some arbitrary rejections, and remember the evidence Selingo cites — long-term success tracks <b>what you do in college</b> (mentors, internships, research, engagement) far more than the name on the diploma.</p>
+  </div>
+</section>
+
+<!-- ================= TAB 2 : TAKEAWAYS ================= -->
+<section id="takeaways">
+  <div class="kicker">Committee-room truths</div>
+  <h2>Myths, stamped and corrected.</h2>
+
+  <div class="grid two">
+    <div class="myth"><div class="stamp">DENIED</div><div class="m">"Admissions is a pure meritocracy."</div><div class="r">It's class-building. Institutional needs — budget, rankings, rosters, majors — decide the close calls between equally qualified kids.</div></div>
+    <div class="myth"><div class="stamp">DENIED</div><div class="m">"A perfect GPA is what matters."</div><div class="r"><b>Rigor beats polish.</b> An A− average in the toughest available courses outranks straight As in easy ones. Readers recalculate GPAs around core courses and look at the trend line.</div></div>
+    <div class="myth"><div class="stamp">DENIED</div><div class="m">"More activities = better."</div><div class="r">Readers scan for <b>depth, commitment, initiative, and impact</b> — often called an interest "spike" — not a laundry list. Jobs and family responsibilities count as real activities.</div></div>
+    <div class="myth"><div class="stamp">DENIED</div><div class="m">"The essay can get anyone in."</div><div class="r">Essays are <b>tie-breakers</b>, read in minutes. An authentic teenage voice about something small and true beats a thesaurus-driven epic about a service trip.</div></div>
+    <div class="myth"><div class="stamp">DENIED</div><div class="m">"Rankings measure education quality."</div><div class="r">U.S. News largely measures wealth, fame, and selectivity — and colleges game it (early decision exists partly for this). Use rankings as a phone book, not a verdict.</div></div>
+    <div class="myth"><div class="stamp">DENIED</div><div class="m">"There is one dream school."</div><div class="r">Dozens of schools can produce the same life outcomes. "Fit" is mostly marketing language; what you build on campus matters more than where.</div></div>
+    <div class="myth"><div class="stamp">DENIED</div><div class="m">"Ivies give big merit scholarships."</div><div class="r">Ivies award <b>zero merit or athletic scholarships</b> — aid is 100% need-based. "Full rides for top students" come from buyers, honors colleges, and outside programs. (See Money tab.)</div></div>
+    <div class="myth"><div class="stamp">DENIED</div><div class="m">"Test-optional means tests are dead."</div><div class="r">Strong scores still help wherever submitted, and some programs/scholarships expect them. Plan to test; decide later whether to submit school-by-school.</div></div>
+  </div>
+
+  <h3>What actually moves the needle</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Factor</th><th>Weight</th><th>Points to remember</th></tr></thead>
+    <tbody>
+      <tr><td><b>Curriculum rigor + grades in core courses</b></td><td><span class="tag hi">Highest</span></td><td>The transcript is the spine of the file. Upward trend helps; senior-year slacking hurts.</td></tr>
+      <tr><td><b>Grade trend &amp; context of your school</b></td><td><span class="tag hi">High</span></td><td>Readers compare you to what your school offers and to past applicants from it.</td></tr>
+      <tr><td><b>Test scores (where submitted)</b></td><td><span class="tag med">Situational</span></td><td>A strong score confirms the transcript; a weak one can be withheld at test-optional schools.</td></tr>
+      <tr><td><b>Extracurricular depth / initiative</b></td><td><span class="tag med">Medium-high</span></td><td>Sustained commitment + leadership + tangible impact in 1–3 things.</td></tr>
+      <tr><td><b>Essays</b></td><td><span class="tag med">Tie-breaker</span></td><td>Voice, specificity, self-awareness. Supplements: prove you researched <em>that</em> school.</td></tr>
+      <tr><td><b>Recommendations</b></td><td><span class="tag med">Tie-breaker</span></td><td>Best letters tell specific classroom stories. Build real relationships with junior-year teachers.</td></tr>
+      <tr><td><b>Demonstrated interest</b></td><td><span class="tag med">School-dependent</span></td><td>Tracked at many privates (opens, visits, interviews); ignored at most mega-publics and Ivies.</td></tr>
+      <tr><td><b>Early decision</b></td><td><span class="tag hi">Big lever</span></td><td>Sellers fill huge shares of the class early; admit rates are markedly friendlier. Binding — risky if you must compare aid offers.</td></tr>
+      <tr><td><b>Hooks (athlete, legacy, dev, first-gen)</b></td><td><span class="tag lo">Not controllable</span></td><td>Real but outside your control. Don't build a strategy around them.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ================= TAB 3 : MONEY ================= -->
+<section id="money">
+  <div class="kicker">Follow the money</div>
+  <h2>"Full scholarship to an Ivy" needs translating.</h2>
+
+  <div class="callout">
+    <h4>Reality check — read this first</h4>
+    <p>Ivy League schools (and peers like Stanford and MIT) offer <b>no merit, academic, or athletic scholarships at all</b>. Every aid dollar is <b>need-based</b>, calculated from family income and assets. So "full ride at an Ivy" is possible only via financial need — many now charge $0 tuition below certain income levels and meet 100% of demonstrated need. If your family's finances wouldn't qualify, the honest version of the goal becomes: <b>(a)</b> admission to an Ivy at the need-based price the calculators show, or <b>(b)</b> a genuine full merit ride at outstanding non-Ivy schools that use money to compete for top students.</p>
+  </div>
+
+  <h3>How college pricing really works</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Concept</th><th>What the book explains</th><th>Family action</th></tr></thead>
+    <tbody>
+      <tr><td><b>Sticker vs. net price</b></td><td>Almost nobody pays the sticker. What matters is net price after aid, which varies wildly by school and family.</td><td>Run each school's <b>Net Price Calculator</b> before falling in love with it. Do this in 9th–10th grade, not senior fall.</td></tr>
+      <tr><td><b>Merit aid = a coupon</b></td><td>"Merit scholarships" are mostly tuition discounts buyers use to lure students who raise their profile. It's enrollment management, not a prize.</td><td>To harvest big merit money, apply where your child sits in the <b>top ~10–25% of the applicant pool</b>.</td></tr>
+      <tr><td><b>Need-based aid at sellers</b></td><td>The richest schools can be the cheapest for middle- and lower-income families — often cheaper than the state flagship.</td><td>Don't rule out elite schools on sticker price. Check their income thresholds for free/reduced tuition.</td></tr>
+      <tr><td><b>Early decision trade-off</b></td><td>ED boosts admission odds but locks you in before comparing offers.</td><td>Only ED if the net price calculator result is affordable and you'd accept it without seeing other offers.</td></tr>
+      <tr><td><b>Negotiation era</b></td><td>Since NACAC's ethics rules were scrapped (2019), schools can sweeten offers and poach admits after May 1.</td><td>Appeal aid offers with competing letters — buyers, especially, will often respond.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Full-ride paths that actually exist for top students</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Path</th><th>Examples to research</th><th>Fits</th></tr></thead>
+    <tbody>
+      <tr><td><b>Elite need-based aid</b></td><td>Ivies, Stanford, MIT, Duke — $0 tuition under income thresholds; loans replaced with grants</td><td>Both kids, if family qualifies by need</td></tr>
+      <tr><td><b>Flagship merit + honors colleges</b></td><td>Full-tuition/full-ride competitions at strong publics (e.g., Alabama, ASU Barrett, Pitt, Ohio State, Georgia Tech's scholarships)</td><td>Excellent for pre-med (cheap undergrad → fund med school) and engineering</td></tr>
+      <tr><td><b>Named national scholarships</b></td><td>Robertson (Duke/UNC), Jefferson (UVA), Morehead-Cain (UNC), Stamps, Coca-Cola, QuestBridge (need-based match to elites)</td><td>Top-tier students; applications start junior/senior year</td></tr>
+      <tr><td><b>Direct programs</b></td><td>BS/MD programs (guaranteed med-school seat); co-op engineering schools</td><td>Kid 1 (BS/MD) · Kid 2 (co-ops)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout green">
+    <h4>The pre-med money insight most families miss</h4>
+    <p>Medical schools barely care where you did undergrad — they care about GPA, MCAT, and experiences. Graduating <b>debt-free from a merit-generous "buyer" or flagship honors college</b>, then spending savings on medical school, is frequently the smarter play than paying full freight at an Ivy. Keep both doors open; decide senior year with real offers on the table.</p>
+  </div>
+</section>
+
+<!-- ================= TAB 4 : KID 1 ================= -->
+<section id="kid1">
+  <div class="kicker">Applicant file · rising 9th grader</div>
+  <h2>Pre-Med Roadmap — Class of 2030</h2>
+  <p class="lede">Goal: elite admission with maximum aid, on a path to medicine. Strategy per the book: <b>maximum rigor in context, one deep healthcare "spike," early testing plan, and a money-smart balanced list</b> (Ivies for need-based aid + merit-rich schools and BS/MD programs as the full-ride engine).</p>
+
+  <div class="dossier">
+    <div class="dossier-head">
+      <span class="name">Applicant 01 · Pre-Med Track</span>
+      <span class="case">FILE NO. 2030-MED · CHECK ITEMS AS COMPLETED</span>
+    </div>
+    <div class="progress"><div id="bar-k1"></div></div>
+    <div class="progress-label" id="lab-k1">0% complete</div>
+
+    <details open>
+      <summary><span class="yr">GRADE 9</span><span class="t">Build the foundation</span><span class="chev">▶</span></summary>
+      <div class="items">
+        <div class="theme">Theme: strongest available schedule + explore, don't overload</div>
+        <div class="item"><input type="checkbox" id="k1a" data-kid="k1"><label for="k1a"><b>Map the 4-year transcript now.</b> Sit with the counselor and plot the most rigorous path the school offers in math, bio→chem→physics, English, history, and one language sustained 4 years. Rigor <em>in context</em> is factor #1.</label></div>
+        <div class="item"><input type="checkbox" id="k1b" data-kid="k1"><label for="k1b"><b>Protect the GPA from day one.</b> Freshman grades count; an upward trend helps but starting strong is easier.</label></div>
+        <div class="item"><input type="checkbox" id="k1c" data-kid="k1"><label for="k1c"><b>Start 1–2 activities that can grow for 4 years</b> (e.g., HOSA/science olympiad, hospital or hospice volunteering, a sport or music kept for balance). Depth later requires starting now.</label></div>
+        <div class="item"><input type="checkbox" id="k1d" data-kid="k1"><label for="k1d"><b>Log everything.</b> Start a simple activities journal (hours, roles, what was accomplished) — raw material for applications and essays.</label></div>
+        <div class="item"><input type="checkbox" id="k1e" data-kid="k1"><label for="k1e"><b>Summer after 9th:</b> first-aid/CPR certification, volunteering, or a science camp; plus a job counts more than parents think.</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="yr">GRADE 10</span><span class="t">Deepen the spike, start testing runway</span><span class="chev">▶</span></summary>
+      <div class="items">
+        <div class="theme">Theme: from participant to contributor</div>
+        <div class="item"><input type="checkbox" id="k1f" data-kid="k1"><label for="k1f"><b>Take PSAT 10 / a practice ACT</b> to pick the better-fitting test; build a light, steady prep habit (free Khan Academy beats cramming).</label></div>
+        <div class="item"><input type="checkbox" id="k1g" data-kid="k1"><label for="k1g"><b>Upgrade the healthcare spike:</b> regular clinical volunteering (hospital, clinic, EMT cadet, nursing home) — sustained hours, not one-off events.</label></div>
+        <div class="item"><input type="checkbox" id="k1h" data-kid="k1"><label for="k1h"><b>Cultivate 2 teachers</b> (ideally science/math) through office hours and class engagement — future recommenders need stories, not adjectives.</label></div>
+        <div class="item"><input type="checkbox" id="k1i" data-kid="k1"><label for="k1i"><b>Run net price calculators</b> with parents on 3 sample schools (one Ivy, one flagship, one merit-heavy private) to set the money strategy early.</label></div>
+        <div class="item"><input type="checkbox" id="k1j" data-kid="k1"><label for="k1j"><b>Summer after 10th:</b> apply to a selective free program (research/medicine summer institutes) or arrange physician shadowing; keep the volunteering streak alive.</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="yr">GRADE 11</span><span class="t">The decisive year</span><span class="chev">▶</span></summary>
+      <div class="items">
+        <div class="theme">Theme: peak rigor, real scores, real list</div>
+        <div class="item"><input type="checkbox" id="k1k" data-kid="k1"><label for="k1k"><b>Heaviest justifiable course load</b> — AP Bio/Chem, advanced math. Junior-year grades are the last full year colleges see.</label></div>
+        <div class="item"><input type="checkbox" id="k1l" data-kid="k1"><label for="k1l"><b>PSAT/NMSQT in October</b> — National Merit status unlocks automatic full rides at several universities.</label></div>
+        <div class="item"><input type="checkbox" id="k1m" data-kid="k1"><label for="k1m"><b>First real SAT/ACT by spring,</b> leaving room for one retake; decide submit-vs-withhold per school later.</label></div>
+        <div class="item"><input type="checkbox" id="k1n" data-kid="k1"><label for="k1n"><b>Seek a research or leadership capstone:</b> local lab assistantship, science-fair project, founding/leading the health club — initiative + impact is what raters score.</label></div>
+        <div class="item"><input type="checkbox" id="k1o" data-kid="k1"><label for="k1o"><b>Build the balanced list (15–20 → trim to ~10):</b> mix sellers (reach) and buyers (merit engines), incl. 2–3 BS/MD programs; every school must pass the affordability + "happy to attend" tests.</label></div>
+        <div class="item"><input type="checkbox" id="k1p" data-kid="k1"><label for="k1p"><b>Visit a cheap local sampler</b> (big public, small private, mid-size) to learn preferences before expensive trips; interview where offered.</label></div>
+        <div class="item"><input type="checkbox" id="k1q" data-kid="k1"><label for="k1q"><b>Ask 2 junior-year teachers for recommendations before summer</b> — early askers get the thoughtful letters.</label></div>
+        <div class="item"><input type="checkbox" id="k1r" data-kid="k1"><label for="k1r"><b>Summer after 11th:</b> draft the personal essay (small, true, in her/his own voice) + a meaningful clinical/research summer; research Robertson, Morehead-Cain, Stamps, QuestBridge deadlines.</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="yr">GRADE 12</span><span class="t">Execute and negotiate</span><span class="chev">▶</span></summary>
+      <div class="items">
+        <div class="theme">Theme: deadlines, strategy, no senior slump</div>
+        <div class="item"><input type="checkbox" id="k1s" data-kid="k1"><label for="k1s"><b>Decide the early card by October 1:</b> ED only if the #1 choice's net-price result is affordable sight-unseen; otherwise use EA broadly. ED is the single biggest odds lever the family controls.</label></div>
+        <div class="item"><input type="checkbox" id="k1t" data-kid="k1"><label for="k1t"><b>Tailor every supplemental essay</b> with named professors, programs, and clinical opportunities — generic supplements are how interest-tracking schools spot low commitment.</label></div>
+        <div class="item"><input type="checkbox" id="k1u" data-kid="k1"><label for="k1u"><b>File FAFSA (+ CSS Profile for privates) as soon as they open;</b> hit priority scholarship deadlines — many full rides close Nov 1–Dec 1.</label></div>
+        <div class="item"><input type="checkbox" id="k1v" data-kid="k1"><label for="k1v"><b>Apply to the named full-ride competitions</b> and BS/MD interviews on the list.</label></div>
+        <div class="item"><input type="checkbox" id="k1w" data-kid="k1"><label for="k1w"><b>Keep senior grades strong</b> — offers are conditional and mid-year reports are read.</label></div>
+        <div class="item"><input type="checkbox" id="k1x" data-kid="k1"><label for="k1x"><b>In April, compare true 4-year net costs side-by-side and appeal aid</b> with competing offers before choosing by May 1. Choose the debt-minimizing path to med school.</label></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= TAB 5 : KID 2 ================= -->
+<section id="kid2">
+  <div class="kicker">Applicant file · rising 7th grader</div>
+  <h2>Engineering / CS·AI Roadmap — Class of 2032</h2>
+  <p class="lede">Two-year head start = the biggest advantage in the book: time. Priorities now are <b>math positioning</b> (the gateway to every engineering door), genuine exploration of computing, and habits — <em>not</em> résumé-building. Note: CS/engineering is often admitted <b>by major</b> with far lower admit rates, so the transcript spike matters even more.</p>
+
+  <div class="dossier">
+    <div class="dossier-head">
+      <span class="name">Applicant 02 · Engineering Track</span>
+      <span class="case">FILE NO. 2032-ENG · CHECK ITEMS AS COMPLETED</span>
+    </div>
+    <div class="progress"><div id="bar-k2"></div></div>
+    <div class="progress-label" id="lab-k2">0% complete</div>
+
+    <details open>
+      <summary><span class="yr">GRADE 7</span><span class="t">Position the math track + play</span><span class="chev">▶</span></summary>
+      <div class="items">
+        <div class="theme">Theme: doors open in middle school math</div>
+        <div class="item"><input type="checkbox" id="k2a" data-kid="k2"><label for="k2a"><b>Confirm the accelerated math path.</b> Ask the school what's required to reach Algebra I by 8th grade — that's what makes Calculus (or beyond) possible by senior year, the de facto expectation for top engineering programs.</label></div>
+        <div class="item"><input type="checkbox" id="k2b" data-kid="k2"><label for="k2b"><b>Make coding a hobby, not a chore:</b> Scratch → Python via playful projects (games, bots). Curiosity now becomes the authentic "spike" later.</label></div>
+        <div class="item"><input type="checkbox" id="k2c" data-kid="k2"><label for="k2c"><b>Join one build-something activity:</b> FIRST LEGO League, robotics club, MATHCOUNTS, or science olympiad — team problem-solving over trophies.</label></div>
+        <div class="item"><input type="checkbox" id="k2d" data-kid="k2"><label for="k2d"><b>Read + write habitually.</b> Engineers get filtered out by weak English grades and flat essays too; the transcript is judged whole.</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="yr">GRADE 8</span><span class="t">Lock the runway into high school</span><span class="chev">▶</span></summary>
+      <div class="items">
+        <div class="theme">Theme: choose the 4-year map before 9th starts</div>
+        <div class="item"><input type="checkbox" id="k2e" data-kid="k2"><label for="k2e"><b>Complete Algebra I</b> (or the school's equivalent gateway) with a strong grade.</label></div>
+        <div class="item"><input type="checkbox" id="k2f" data-kid="k2"><label for="k2f"><b>Plan the high-school course map with the counselor:</b> math through Calc (AP CS A when available), physics-inclusive science sequence, 4 years of a language, honors English/history — rigor in context again.</label></div>
+        <div class="item"><input type="checkbox" id="k2g" data-kid="k2"><label for="k2g"><b>Ship one small real project</b> (a simple game, an Arduino gadget, a data mini-analysis) and keep it in a folder — the beginning of a portfolio.</label></div>
+        <div class="item"><input type="checkbox" id="k2h" data-kid="k2"><label for="k2h"><b>Try a first competition</b> (AMC 8, a beginner CTF or hackathon for kids) purely for experience.</label></div>
+        <div class="item"><input type="checkbox" id="k2i" data-kid="k2"><label for="k2i"><b>Summer:</b> a maker/coding camp or self-driven project; unstructured tinkering is legitimate and shows in essays later.</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="yr">GRADES 9–10</span><span class="t">Depth over breadth</span><span class="chev">▶</span></summary>
+      <div class="items">
+        <div class="theme">Theme: grow one visible thread</div>
+        <div class="item"><input type="checkbox" id="k2j" data-kid="k2"><label for="k2j"><b>Strongest available STEM schedule + protect all grades</b> (including humanities).</label></div>
+        <div class="item"><input type="checkbox" id="k2k" data-kid="k2"><label for="k2k"><b>Pick 1–2 anchor activities and stay:</b> robotics team, competitive programming (USACO), math team — aim to move from member → contributor → officer.</label></div>
+        <div class="item"><input type="checkbox" id="k2l" data-kid="k2"><label for="k2l"><b>Build the portfolio publicly:</b> GitHub projects, a small app used by real people, or an AI/ML experiment written up simply. Impact and initiative are what raters reward.</label></div>
+        <div class="item"><input type="checkbox" id="k2m" data-kid="k2"><label for="k2m"><b>PSAT 10 + test plan,</b> same playbook as sibling; borrow everything the family learned two years earlier.</label></div>
+        <div class="item"><input type="checkbox" id="k2n" data-kid="k2"><label for="k2n"><b>Explore the AI/ML vs. hardware vs. software question</b> through free courses and projects — "not sure yet" is fine; the transcript should keep every engineering door open.</label></div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="yr">GRADES 11–12</span><span class="t">Reuse the family playbook</span><span class="chev">▶</span></summary>
+      <div class="items">
+        <div class="theme">Theme: the sibling's roadmap, tuned for engineering</div>
+        <div class="item"><input type="checkbox" id="k2o" data-kid="k2"><label for="k2o"><b>Calculus (or higher) senior year, physics done,</b> capstone project or research; PSAT/NMSQT junior October for National Merit money.</label></div>
+        <div class="item"><input type="checkbox" id="k2p" data-kid="k2"><label for="k2p"><b>Know that CS is admitted by major at many schools</b> — apply strategically (some schools admit undeclared more easily; transferring into CS internally can be nearly impossible; research each school's policy).</label></div>
+        <div class="item"><input type="checkbox" id="k2q" data-kid="k2"><label for="k2q"><b>Balanced list, engineering edition:</b> Ivies/MIT/Stanford (need-based reaches) + elite publics (Ga Tech, Purdue, Illinois, Michigan) + merit-rich privates and honors colleges + co-op schools (Northeastern, Cincinnati).</label></div>
+        <div class="item"><input type="checkbox" id="k2r" data-kid="k2"><label for="k2r"><b>Run the ED decision and the money plan</b> exactly as in the sibling's Grade 12 checklist — calculators first, binding commitments second.</label></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= TAB 6 : FAMILY ================= -->
+<section id="family">
+  <div class="kicker">Shared operating manual</div>
+  <h2>The Family Playbook</h2>
+  <p class="lede">Rules that apply to both files — mostly about parents' behavior, money, and sanity. Selingo's data point worth framing on the wall: the overwhelming majority of U.S. colleges admit most applicants; the frenzy is concentrated in a tiny slice of schools, and life outcomes don't hinge on that slice.</p>
+
+  <h3>Building each list (junior year)</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Rule</th><th>How to apply it</th></tr></thead>
+    <tbody>
+      <tr><td><b>Balance sellers and buyers</b></td><td>Reaches for need-based aid + targets/likelies where the kid is in the top of the pool for merit money. Every school must be one they'd genuinely attend.</td></tr>
+      <tr><td><b>Affordability is an entry criterion</b></td><td>Net price calculator before the school goes on the list — not after an acceptance.</td></tr>
+      <tr><td><b>Beware the undermatch trap</b></td><td>Strong students at under-resourced schools graduate less often and with less support. A generous seller can beat a cut-rate buyer.</td></tr>
+      <tr><td><b>Judge outcomes, not amenities</b></td><td>Ask about 4-year graduation rates, advising, research/internship access for undergrads — not climbing walls.</td></tr>
+      <tr><td><b>Rejection ≠ verdict on the kid</b></td><td>Class-shaping math turns away thousands of qualified applicants; say this out loud at home before decisions arrive.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Parent do / don't</h3>
+  <div class="dd">
+    <div class="col do"><h4>Do</h4><ul>
+      <li>Talk about money early and honestly — set the budget in 9th/10th grade, not April of senior year.</li>
+      <li>Let the kids own their essays, emails, and interviews; authentic teenage voice is an asset readers can detect.</li>
+      <li>Encourage one real job or family responsibility — admissions readers respect it.</li>
+      <li>Model calm: treat the search as a match-finding project with many good endings.</li>
+      <li>Reuse everything learned from Kid 1 for Kid 2 — the two-year lag is a strategic gift.</li>
+    </ul></div>
+    <div class="col dont"><h4>Don't</h4><ul>
+      <li>Don't over-schedule 10 shallow activities; raters score depth, initiative, and impact.</li>
+      <li>Don't write or heavily edit the essays — polished adult prose is a red flag.</li>
+      <li>Don't chase rankings or a single "dream school"; both are marketing artifacts.</li>
+      <li>Don't sign an ED agreement you couldn't afford without comparing offers.</li>
+      <li>Don't sacrifice sleep, mental health, or the actual enjoyment of high school — burnout shows up in grades and essays alike.</li>
+    </ul></div>
+  </div>
+
+  <h3>Points to remember (the fridge list)</h3>
+  <div class="grid two">
+    <div class="myth"><div class="m">1 · Rigor in context is king.</div><div class="r">Hardest available schedule, strong core grades, upward trend.</div></div>
+    <div class="myth"><div class="m">2 · One spike beats ten lines.</div><div class="r">Depth, initiative, leadership, measurable impact.</div></div>
+    <div class="myth"><div class="m">3 · ED is the biggest lever — and a money trap.</div><div class="r">Use it only when the net price is known and acceptable.</div></div>
+    <div class="myth"><div class="m">4 · Ivies = need-based aid only.</div><div class="r">Full merit rides live at buyers, flagships, and named scholarships.</div></div>
+    <div class="myth"><div class="m">5 · You're judged against your school.</div><div class="r">Context drives the read; know what past applicants achieved.</div></div>
+    <div class="myth"><div class="m">6 · Where you go &lt; what you do there.</div><div class="r">Mentors, research, internships, engagement predict outcomes.</div></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>Summary &amp; action plan inspired by <i>Who Gets In and Why</i> by Jeffrey Selingo (Scribner, 2020). Buy the book — this page is a family study aid, not a substitute.</span>
+    <span style="display:flex;gap:10px;align-items:center">
+      <span class="views" id="views">👁 views: <b>…</b></span>
+      <button class="reset" id="resetBtn" title="Clear all checkbox progress">reset progress</button>
+    </span>
+  </div>
+</footer>
+
+<script>
+/* ---------- tabs ---------- */
+const nav = document.getElementById('nav');
+nav.addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  nav.querySelectorAll('button').forEach(b=>b.classList.toggle('active', b===btn));
+  document.querySelectorAll('main section').forEach(s=>s.classList.toggle('active', s.id===btn.dataset.tab));
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+/* ---------- checklist persistence (works on GitHub Pages; fails safe elsewhere) ---------- */
+const KEY='wgiw-progress-v1';
+function loadState(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } }
+function saveState(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+let state = loadState();
+
+const boxes = document.querySelectorAll('.item input[type=checkbox]');
+boxes.forEach(b=>{
+  if(state[b.id]) b.checked=true;
+  b.addEventListener('change', ()=>{ state[b.id]=b.checked; saveState(state); updateBars(); });
+});
+
+function updateBars(){
+  ['k1','k2'].forEach(kid=>{
+    const list=[...document.querySelectorAll(`.item input[data-kid=${kid}]`)];
+    const done=list.filter(b=>b.checked).length;
+    const pct=list.length?Math.round(done/list.length*100):0;
+    const bar=document.getElementById('bar-'+kid), lab=document.getElementById('lab-'+kid);
+    if(bar) bar.style.width=pct+'%';
+    if(lab) lab.textContent=`${pct}% complete · ${done}/${list.length} actions`;
+  });
+}
+updateBars();
+
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  if(!confirm('Clear all checked progress for both kids?')) return;
+  state={}; saveState(state);
+  boxes.forEach(b=>b.checked=false);
+  updateBars();
+});
+
+/* ---------- simple views counter (free counterapi.dev; hides itself if unreachable) ---------- */
+(async ()=>{
+  const el=document.getElementById('views');
+  try{
+    const r=await fetch('https://api.counterapi.dev/v1/wgiw-family-playbook/pageviews/up');
+    const d=await r.json();
+    const n=(d && (d.count ?? d.Count));
+    if(typeof n==='number'){ el.innerHTML='👁 views: <b>'+n.toLocaleString()+'</b>'; }
+    else el.style.display='none';
+  }catch(e){ el.style.display='none'; }
+})();
+</script>
+</body>
+</html>
